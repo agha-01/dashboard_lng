@@ -3,14 +3,14 @@ class Viewer{
 	public function __construct(){
 
 	}
-	public function view($str,$parametr=null){
+	public function view($str,$lng,$param=null){
 		$fileName = 'View/'.$str.'.php';
 		if ($str=="login") {
 			include $fileName;
 			return true;
 		}
 		elseif (file_exists($fileName)) {
-			if (@$_SESSION["email"]==null) {
+			if (@$_SESSION["Dashboardemail"]==null) {
 				echo "bele bir sehife yoxdur.";
 			}
 			else{

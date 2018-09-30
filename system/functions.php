@@ -12,7 +12,7 @@ class Functions{
 				$pageController = new $contUrl[0]();
 				if ($pageController->existsMethod($contUrl[1])) {
 					if (isset($contUrl[2])) {
-						$pageController->$contUrl[1]($contUrl[2]);
+						$pageController->$contUrl[1]($contUrl[2],$contUrl[3]);
 					}
 					else{
 						$pageController->$contUrl[1]();
@@ -27,11 +27,12 @@ class Functions{
 				include 'Controllers/pageController.php';
 				$pController = new pageController();
 				if($pController->existsMethod($contUrl[0])){
-					if (isset($contUrl[1])) {
-						$pController->$contUrl[0]($contUrl[1]);
+					if (isset($contUrl[2])) {
+						$pController->$contUrl[0]($contUrl[1],$contUrl[2]);
 					}
 					else{
-						$pController->$contUrl[0]();
+
+						@$pController->$contUrl[0]($contUrl[1]);
 					}
 				}
 				else{

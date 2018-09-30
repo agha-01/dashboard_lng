@@ -1,23 +1,28 @@
 <div class="col-lg-10">
                     <div class="card">
                       <div class="card-header">
-                        <strong>Basic Form</strong> Elements
+                        <strong>edit news</strong>
                       </div>
-                      <div class="card-body card-block">
-                        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+          <!-- Azerbaycan dili start -->
+        <div class="card-body card-block">
+          <form action="<?php echo $site_url.'newsedit/'.$lng."/$param"; ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+                <?php 
+
+                $sql=Controller::$conn->selectForEdit("news",$param);
+                      $row=mysqli_fetch_assoc($sql);
+                    
+                 ?>
+                        <i class="flag-icon flag-icon-az" style="float: right; font-size: 30px;"></i>
+                        <br>
+                        <br>
                           <div class="row form-group">
-                            <div class="col col-md-3"><label class=" form-control-label">Static</label></div>
-                            <div class="col-12 col-md-9">
-                              <p class="form-control-static">Username</p>
-                            </div>
-                          </div>
-                          <div class="row form-group">
-                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Text Input</label></div>
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">basliq</label></div>
                             <div class="col-12 col-md-9">
 
-                            	<input type="text" id="text-input" name="text-input" placeholder="Basliq" class="form-control">
+                            	<input type="text" id="text-input" name="basliq" value="<?php echo $row["basliq"];?>" placeholder="Basliq" class="form-control" required>
 
-                            	<small class="form-text text-muted">This is a help text</small></div>
+                            	<small class="form-text text-muted">basliq</small></div>
                           </div>
                           
                           
@@ -26,42 +31,155 @@
                             <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Text</label></div>
                             <div class="col-12 col-md-9">
 
-                            	<textarea name="textarea-input" id="textarea-input" rows="9" placeholder="Text" class="form-control"></textarea>
+                            	<textarea name="text"  id="textarea-input" rows="9" placeholder="Text" class="form-control">
+                              <?php echo $row["text"]; ?>
+                              </textarea>
 
+                            </div>
+                          </div>
+                          <div class="row form-group">
+                            <div class="col col-md-3"><label for="select" class=" form-control-label">Kateqoriya</label></div>
+                            <div class="col-12 col-md-9">
+                              <select name="status" id="select" class="form-control">
+                                <option value="0">Kateqoriya</option>
+                                <option value="1" <?php if ($row["kate"]==1) {
+                                  echo "selected";
+                                } ?>>Olke</option>
+                                <option value="2" <?php if ($row["kate"]==2) {
+                                  echo "selected";
+                                } ?>>Siyaset</option>
+                                <option value="3" <?php if ($row["kate"]==3) {
+                                  echo "selected";
+                                } ?>>Kriminal</option>
+                                <option value="4" <?php if ($row["kate"]==1) {
+                                  echo "selected";
+                                } ?>>Sou-biznes</option>
+                                <option value="5" <?php if ($row["kate"]==4) {
+                                  echo "selected";
+                                } ?>>Idman</option>
+                                <option value="6" <?php if ($row["kate"]==5) {
+                                  echo "selected";
+                                } ?>>Maraqli</option>
+                      
+                              </select>
                             </div>
                           </div>
                           <div class="row form-group">
                             <div class="col col-md-3"><label for="select" class=" form-control-label">Status</label></div>
                             <div class="col-12 col-md-9">
-                              <select name="select" id="select" class="form-control">
-                                <option value="0">Please select</option>
-                                <option value="1">Aktiv</option>
-                                <option value="2">Passiv #2</option>
+                              <select name="status"  id="select" class="form-control">
+                                <option value="1" <?php if ($row["status"]==1) {
+                                  echo "selected";
+                                } ?>>Active</option>
+                                <option value="2" <?php if ($row["status"]==2) {
+                                  echo "selected";
+                                } ?>>Passive</option>
+                                <option value="3" <?php if ($row["status"]==3) {
+                                  echo "selected";
+                                } ?>>All</option>
+                                
                      	
                               </select>
                             </div>
-                          </div>
-                          
-                          
-                          
-                         
+                          </div>                        
                           <div class="row form-group">
                             <div class="col col-md-3"><label for="file-input" class=" form-control-label">File input</label></div>
-                            <div class="col-12 col-md-9"><input type="file" id="file-input" name="file-input" class="form-control-file"></div>
+                            <div class="col-12 col-md-9"><input type="file" id="file-input" name="image" class="form-control-file"></div>
                           </div>
+                          <input type="hidden" name="hidden" value="<?php echo $row["id"]; ?>">
+                          <input type="hidden" name="uImage" value="<?php echo $row["image"]; ?>">
+                         
+        </div>
+        <!-- Azerbaycan dili end -->
+
+
+        <!-- Rus dili start -->
+        <div class="card-body card-block">
+         
+                <?php 
+
+                $sql=Controller::$conn->selectForEdit("news",$param+1);
+                      $row=mysqli_fetch_assoc($sql);
+                      
+                 ?>
+                 <i class="flag-icon flag-icon-ru" style="float: right; font-size: 30px;"></i>
+                        <br>
+                        <br>
+                          <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">basliq</label></div>
+                            <div class="col-12 col-md-9">
+
+                              <input type="text" id="text-input" name="basliqr" value="<?php echo $row["basliq"];?>" placeholder="Basliq" class="form-control" required>
+
+                              <small class="form-text text-muted">basliq</small></div>
+                          </div>
+                          
+                          
+                        
+                          <div class="row form-group">
+                            <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Text</label></div>
+                            <div class="col-12 col-md-9">
+
+                              <textarea name="textr"  id="textarea-input" rows="9" placeholder="Text" class="form-control">
+                              <?php echo $row["text"]; ?>
+                              </textarea>
+
+                            </div>
+                          </div>
+                       
+        </div>
+        <!-- rus dili end -->
+
+        <!-- Ingilis dili start -->
+        <div class="card-body card-block">
+          
+                <?php 
+
+                $sql=Controller::$conn->selectForEdit("news",$param+2);
+                      $row=mysqli_fetch_assoc($sql);
+                      
+                 ?>
+                 <i class="flag-icon flag-icon-us" style="float: right; font-size: 30px;"></i>
+                        <br>
+                        <br>
+                          <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">basliq</label></div>
+                            <div class="col-12 col-md-9">
+
+                              <input type="text" id="text-input" name="basliqen" value="<?php echo $row["basliq"];?>" placeholder="Basliq" class="form-control" required>
+
+                              <small class="form-text text-muted">basliq</small></div>
+                          </div>
+                          
+                          
+                        
+                          <div class="row form-group">
+                            <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Text</label></div>
+                            <div class="col-12 col-md-9">
+
+                              <textarea name="texten"  id="textarea-input" rows="9" placeholder="Text" class="form-control">
+                              <?php echo $row["text"]; ?>
+                              </textarea>
+
+                            </div>
+                          </div>
+                          
+                          <input type="hidden" name="hidden" value="<?php echo $row["id"]; ?>">
+                          <input type="hidden" name="uImage" value="<?php echo $row["image"]; ?>">
                           <div class="card">
                     
-	                      <div class="card-footer">
-	                        <button type="submit" class="btn btn-primary btn-sm">
-	                          <i class="fa fa-dot-circle-o"></i> Submit
-	                        </button>
-	                        <button type="reset" class="btn btn-danger btn-sm">
-	                          <i class="fa fa-ban"></i> Reset
-	                        </button>
-	                      </div>
-	                   	 </div>
-                        </form>
-                      </div>
+                        <div class="card-footer">
+                          <button type="submit" class="btn btn-primary btn-sm">
+                            <i class="fa fa-dot-circle-o"></i> Submit
+                          </button>
+                          <button type="reset" class="btn btn-danger btn-sm">
+                            <i class="fa fa-ban"></i> Reset
+                          </button>
+                        </div>
+                       </div>
+            </form>
+        </div>
+        <!-- Ingilis dili end -->
                      
                     </div>
                     

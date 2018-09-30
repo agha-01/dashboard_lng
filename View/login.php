@@ -1,15 +1,16 @@
 <?php 
 
 
-if (@$_SESSION["email"]!=null) {
+if (@$_SESSION["Dashboardemail"]!=null) {
      echo "<script>
-        location.replace('home');
+        location.replace('home/az');
     </script>";
 }
 elseif (@$_POST["email"]!=0 || @$_POST["password"]!=null) {
   $email = $_POST["email"];
   $pass = $_POST["password"];
   Controller::$conn->a_login($email,$pass);
+  Controller::$conn->giris();
   
 }
 else{

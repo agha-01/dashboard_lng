@@ -1,9 +1,11 @@
-     <style>
+             <style>
        #bootstrap-data-table_filter{
         display: flex!important;
         justify-content: flex-end !important;
        }
      </style>
+
+      
 
       <div class="breadcrumbs">
             <div class="col-sm-4">
@@ -17,9 +19,8 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Table</a></li>
-                            <li class="active">Data table</li>
+                            <li><a href="<?php echo $site_url; ?>home">Dashboard</a></li>
+                            <li><a href="<?php echo $site_url; ?>news">Xeberler</a></li>
                         </ol>
                     </div>
                 </div>
@@ -34,7 +35,7 @@
                     <div class="card">
                         <div class="card-header">
                             <strong class="card-title">Xəbərlər</strong>
-                             <a href="addnews">
+                             <a href="<?php echo $site_url.'addnews/'.$lng;?>">
                                <h4 class="card-title float-right text-danger">Yeni xəbər əlavə et</h4>
                              </a>
                         </div>
@@ -43,100 +44,94 @@
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                        <th>#  id</th>
+                        <th>id</th>
                         <th>Şəkil</th>
                         <th>Başlıq</th>
                         <th>Yerləşdirilmə tarixi </th>
+                        <th>kateqoriya</th>
+                        <th>Status</th>
                         <th>Baxış sayı</th>
+                        <th>Beyenme sayı</th>
+                        <th>Beyenmeme sayı</th>                    
                         <th>edit/delete</th>
                       </tr>
                     </thead>
                     <tbody>
+                      <?php 
+                        if ($param==3) {
+                          $sql=Controller::$conn->Select('news',$lng);
+                        }
+                        else{
+                          $sql=Controller::$conn->Select('news',$lng,"status=$param");
+                        }
+                      while ($row=mysqli_fetch_assoc($sql)) {
+                       ?>
+
                       <tr>
-                        <td>Tiger Nixon</td>
-                        <td><img src="images/placeholder.png" width="150"></td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>$320,800</td>
+                        <td><?php echo $row["id"]; ?></td>
+                         <td><img src="<?php echo $site_url.$row["image"]; ?>" width="150"></td>
+                        <td><?php echo $row["basliq"]; ?></td>
+                        <td><?php echo $row["tarix"]; ?></td>
+                        <td><?php
+
+                          if ($row["kate"]==0) {
+                            echo "Kateqoriya yoxdur";
+                          }
+                          else if ($row["kate"]==1) {
+                            echo "Olke";
+                          }
+                          else if ($row["kate"]==2) {
+                            echo "Siyaset";
+                          }
+                          else if ($row["kate"]==3) {
+                            echo "Kriminal";
+                          }
+                          else if ($row["kate"]==4) {
+                            echo "Sou-biznes";
+                          }
+                          else if ($row["kate"]==5) {
+                            echo "Idman";
+                          }
+                          else if ($row["kate"]==6) {
+                            echo "Maraqli";
+                          }
+                          ?>
+
+                        </td>
+                        <?php 
+
+                         if ($row["status"]==1) {
+                         
+                                echo '<td class="text-success">Active</td>';
+                                }
+                                else{
+                                   echo '<td class="text-success">Passive</td>';
+                                }
+                              ?>  
+                        <td>50</td>
+                        <td>100</td>
+                        <td>23</td>
                         <td>
-                          <a href="editnews"><button class="btn btn-success">Düzəliş et</button>
+                          <a href="<?php echo $site_url;?>editnews/<?php echo "$lng/".$row["id"]; ?>"><button class="btn btn-success">Düzəliş et</button>
                             </a>
-                          <button class="btn btn-danger">Sil</button>
+                           <a href="<?php echo $site_url.'delete/'."$lng/".'news_'.$row["id"]; ?>" id="deletee" ><button class="btn btn-danger">Sil</button></a>
+
+                                <script>
+                                  deletee.addEventListener("click",function(e){
+                                    if (confirm("Silmek istediyinize eminsiniz?")) {
+
+                                    }
+                                    else{
+                                      e.preventDefault();
+                                    }
+                                  });
+                                </script>
                         </td>
                       </tr>
-                      <tr>
-                        <td>Garrett Winters</td>
-                        <td><img src="images/placeholder.png" width="150"></td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>$170,750</td>
-                         <td>
-                          <a href="editnews"><button class="btn btn-success">Düzəliş et</button>
-                            </a>
-                          <button class="btn btn-danger">Sil</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Ashton Cox</td>
-                        <td><img src="images/placeholder.png" width="150"></td>
-                        <td>Junior Technical Author</td>
-                        <td>San Francisco</td>
-                        <td>$86,000</td>
-                         <td>
-                          <a href="editnews"><button class="btn btn-success">Düzəliş et</button>
-                            </a>
-                          <button class="btn btn-danger">Sil</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Cedric Kelly</td>
-                        <td><img src="images/placeholder.png" width="150"></td>
-                        <td>Senior Javascript Developer</td>
-                        <td>Edinburgh</td>
-                        <td>$433,060</td>
-                         <td>
-                          <a href="editnews"><button class="btn btn-success">Düzəliş et</button>
-                            </a>
-                          <button class="btn btn-danger">Sil</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Airi Satou</td>
-                        <td><img src="images/placeholder.png" width="150"></td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>$162,700</td>
-                         <td>
-                          <a href="editnews"><button class="btn btn-success">Düzəliş et</button>
-                            </a>
-                          <button class="btn btn-danger">Sil</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Brielle Williamson</td>
-                        <td><img src="images/placeholder.png" width="150"></td>
-                        <td>Integration Specialist</td>
-                        <td>New York</td>
-                        <td>$372,000</td>
-                         <td>
-                          <a href="editnews"><button class="btn btn-success">Düzəliş et</button>
-                            </a>
-                          <button class="btn btn-danger">Sil</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Herrod Chandler</td>
-                        <td><img src="images/placeholder.png" width="150"></td>
-                        <td>Sales Assistant</td>
-                        <td>San Francisco</td>
-                        <td>$137,500</td>
-                         <td>
-                          <a href="editnews"><button class="btn btn-success">Düzəliş et</button>
-                            </a>
-                          <button class="btn btn-danger">Sil</button>
-                        </td>
-                      </tr>
-              
+                      
+
+                    <?php } ?>
+
                     </tbody>
                   </table>
                         </div>
@@ -154,4 +149,4 @@
     <!-- Right Panel -->
 
 
-    
+  

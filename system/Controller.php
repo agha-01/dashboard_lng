@@ -8,6 +8,7 @@ class Controller{
 		session_start();
 		self::$view = new Viewer();
 		
+		
 	}
 }
 

@@ -7,7 +7,9 @@
  *
  * Copyright (c) 2017 Daniel Eden
  */
-
+button a{
+  color: white !important;
+}
 .animated {
   animation-duration: 1s;
   animation-fill-mode: both;
